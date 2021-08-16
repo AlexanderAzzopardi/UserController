@@ -1,34 +1,6 @@
 # UserController
 These two Microservice keep track of logged in users as well as the number of users on a server. Assigns each new user a GUID (Globally Unique Identifier) as a key to access the data from a redis store.
 
-The functions in the UserController microservice are the following:
-## Add
-    POST http://localhost:5010/v1.0/invoke/account-service/method/add HTTP/1.1
-    content-type: application/json
-
-    {
-        "Name": ""
-    }
-
-## Delete
-    POST http://localhost:5010/v1.0/invoke/account-service/method/delete HTTP/1.1
-    content-type: application/json
-
-    {
-        "Id": ""
-    }
-
-## Get
-    POST http://localhost:5010/v1.0/invoke/account-service/method/get HTTP/1.1
-    content-type: application/json
-
-    {
-        "Id": ""
-    }
-
-## Check
-    POST http://localhost:5010/v1.0/invoke/account-service/method/check HTTP/1.1
-    
 # Prerequisites
 #### Installation of Docker 
 ![Docker](https://github.com/AlexanderAzzopardi/UnitConvertor/blob/main/Saved%20Pictures/DockerLogo.jfif)
@@ -77,3 +49,40 @@ To run the redis store you need you need to run the microservice via dapr.
 To run the useraccount microservice you need to run it via dapr.
 
 > dapr run --app-id "account-service" --app-port "5002" --dapr-grpc-port "50010" --dapr-http-port "5010" -- dotnet run --urls="http://+:5002"
+
+# Commands
+## Add
+Adds a user to the server and creates a unique id as the key to locate this user. Adds one to the number of users online.
+
+    POST http://localhost:5010/v1.0/invoke/account-service/method/add HTTP/1.1
+    content-type: application/json
+
+    {
+        "Name": ""
+    }
+
+## Delete
+Removes a user from the server using the unique id as the key to locate this user. Removes one from the number of users online.
+
+    POST http://localhost:5010/v1.0/invoke/account-service/method/delete HTTP/1.1
+    content-type: application/json
+
+    {
+        "Id": ""
+    }
+
+## Get
+Gets a users name from the server using the unique id as the key to locate this user.
+
+    POST http://localhost:5010/v1.0/invoke/account-service/method/get HTTP/1.1
+    content-type: application/json
+
+    {
+        "Id": ""
+    }
+
+## Check
+Checks how many users are online.
+
+    POST http://localhost:5010/v1.0/invoke/account-service/method/check HTTP/1.1
+    
