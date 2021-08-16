@@ -72,8 +72,6 @@ To run the redis store you need you need to run the microservice via dapr.
 
 > dapr run --app-id myapp --dapr-http-port 3500 dotnet run
 
-It will now be up and running.
-
 # User Account
 ### Running useraccount microservice
 To run the useraccount microservice you need to run it via dapr.
