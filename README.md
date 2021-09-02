@@ -1,5 +1,5 @@
 # UserController
-These two Microservice keep track of logged in users as well as the number of users on a server. Assigns each new user a GUID (Globally Unique Identifier) as a key to access the data from a redis store.
+A microservice which keeps track of how many users are online aswell as the details of those users. The information is stored inside a redis store using dapr and docker kubernetes. It assigns each user a key in the form of a GUID (Globally Unique Identifier) where its information is stored. A list of all the user keys is also stored for ease of access.
 
 # Prerequisites
 #### Installation of Docker 
@@ -14,7 +14,6 @@ These two Microservice keep track of logged in users as well as the number of us
 Search **RestClient** in the extension tab and install. 
 
 # Redis Store
-### Setting up the Redis Store
 When setting up a redis store you need to create a .yaml file 
 
     apiVersion: dapr.io/v1alpha1
@@ -34,37 +33,29 @@ When setting up a redis store you need to create a .yaml file
         value: true # Optional. Allowed: true, false.
       - name: failover
         value: true # Optional. Allowed: true, false.
-  
-The name of the redis store is set by the tag *name:* and in this case is *statestore*.
-
-### Running the Redis Store
-To run the redis store you need you need to run the microservice via dapr.
-
-> cd sample.microservice.rediscache
-
-> dapr run --app-id myapp --dapr-http-port 3500 dotnet run
 
 # User Account
 ### Running useraccount microservice
 To run the useraccount microservice you need to run it via dapr.
 
-> dapr run --app-id "account-service" --app-port "5002" --dapr-grpc-port "50010" --dapr-http-port "5010" -- dotnet run --urls="http://+:5002"
+> dapr run --app-id "account-service" --app-port "5001" --dapr-grpc-port "50010" --dapr-http-port "5010" -- dotnet run --urls="http://+:5001"
 
 # Commands
 ## Add
 Adds a user to the server and creates a unique id as the key to locate this user. Adds one to the number of users online.
 
-    POST http://localhost:5010/v1.0/invoke/account-service/method/add HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/account-service/method/add HTTP/1.1
     content-type: application/json
 
     {
-        "Name": ""
+        "Name": "",
+        "Age" : ""
     }
 
 ## Delete
 Removes a user from the server using the unique id as the key to locate this user. Removes one from the number of users online.
 
-    POST http://localhost:5010/v1.0/invoke/account-service/method/delete HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/account-service/method/delete HTTP/1.1
     content-type: application/json
 
     {
@@ -74,7 +65,7 @@ Removes a user from the server using the unique id as the key to locate this use
 ## Get
 Gets a users name from the server using the unique id as the key to locate this user.
 
-    POST http://localhost:5010/v1.0/invoke/account-service/method/get HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/account-service/method/get HTTP/1.1
     content-type: application/json
 
     {
@@ -84,5 +75,10 @@ Gets a users name from the server using the unique id as the key to locate this 
 ## Check
 Checks how many users are online.
 
-    POST http://localhost:5010/v1.0/invoke/account-service/method/check HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/account-service/method/check HTTP/1.1
+
+## List
+Prints out the id's of all the online users.
+
+    GET http://localhost:5010/v1.0/invoke/account-service/method/list HTTP/1.1
     
