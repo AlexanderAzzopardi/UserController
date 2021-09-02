@@ -1,0 +1,31 @@
+###
+GET http://localhost:5010/v1.0/invoke/account-service/method/add HTTP/1.1
+content-type: application/json
+
+{
+    "Name": "",
+    "Age" : ""
+}
+
+###
+GET http://localhost:5010/v1.0/invoke/account-service/method/delete HTTP/1.1
+content-type: application/json
+
+{
+    "Id": ""
+}
+###
+GET http://localhost:5010/v1.0/invoke/account-service/method/get HTTP/1.1
+content-type: application/json
+
+{
+    "Id": ""
+}
+
+###
+GET http://localhost:5010/v1.0/invoke/account-service/method/check HTTP/1.1
+
+###
+GET http://localhost:5010/v1.0/invoke/account-service/method/list HTTP/1.1
+
+
