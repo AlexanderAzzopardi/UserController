@@ -10,9 +10,6 @@ A microservice which keeps track of how many users are online aswell as the deta
 ![Dapr](https://github.com/AlexanderAzzopardi/UnitConvertor/blob/main/Saved%20Pictures/DaprLogo.jfif)
 > <https://docs.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/getting-started>
 
-#### Installation of RestClient
-Search **RestClient** in the extension tab and install. 
-
 # Redis Store
 When setting up a redis store you need to create a .yaml file 
 
